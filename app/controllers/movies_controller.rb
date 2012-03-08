@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
   end
 
   def index
+    @all_ratings = Movie.all_ratings
+    puts @all_ratings.inspect
     sort_by = params[:sort]
     unless sort_by.nil?
       @movies = Movie.find(:all, :order => "#{sort_by} ASC")
