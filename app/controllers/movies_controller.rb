@@ -20,7 +20,9 @@ class MoviesController < ApplicationController
       @movies = Movie.find(:all, :conditions => [ "rating IN (?)", selected_ratings])
     end
     session[:ratings], session[:sort] = @ratings, @sort_by
-    redirect_to movies_path(:sort => @sort_by, :ratings => @ratings) if params[:sort].nil? or params[:ratings].nil?
+    if params[:sort].nil? and params[:ratings].nil?
+      redirect_to movies_path(:sort => @sort_by, :ratings => @ratings) unless session[:sort].nil? and session[:ratings].nil?
+    end
   end
 
   def new
