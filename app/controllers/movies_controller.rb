@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     sort_by = params[:sort]
-    selected_ratings = params[:ratings].keys unless params[:rating].nil?
+    selected_ratings = params[:ratings].keys unless params[:ratings].nil?
     selected_ratings = @all_ratings if selected_ratings.nil? or selected_ratings.empty?
     unless sort_by.nil? or sort_by.empty?
       @movies = Movie.find(:all, :conditions => [ "rating IN (?)", selected_ratings], :order => "#{sort_by} ASC")
